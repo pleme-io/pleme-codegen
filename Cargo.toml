@@ -1,0 +1,82 @@
+[package]
+name = "pleme-codegen"
+version = "0.1.0"
+edition = "2021"
+resolver = "2"
+authors = ["Pleme Development Team"]
+license = "MIT"
+description = "Code generation macros for Pleme services with Brazilian market features"
+repository = "https://github.com/pleme-io/pleme-codegen"
+homepage = "https://github.com/pleme-io/pleme-codegen"
+readme = "README.md"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = { version = "2.0", features = ["extra-traits", "full"] }
+heck = "0.4"
+uuid = "1.0"
+chrono = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+async-graphql = { version = "6.0", features = ["chrono", "uuid"] }
+sqlx = { version = "0.7", features = ["chrono", "postgres", "runtime-tokio-rustls", "uuid"] }
+rust_decimal = { version = "1.0", features = ["serde"] }
+redis = { version = "0.24", features = ["tokio-comp"] }
+deadpool-redis = "0.14"
+tracing = "0.1"
+lazy_static = "1.4"
+rand = "0.8"
+regex = "1.0"
+chrono-tz = "0.8"
+thiserror = "1.0"
+async-trait = "0.1"
+
+[dev-dependencies]
+tokio-test = "0.4"
+tokio = { version = "1.0", features = ["full"] }
+tempfile = "3.0"
+trybuild = "1.0"
+criterion = { version = "0.5", features = ["html_reports"] }
+uuid = { version = "1.0", features = ["v4"] }
+rust_decimal = { version = "1.0", features = ["serde"] }
+thiserror = "1.0"
+sqlx = { version = "0.7", features = ["chrono", "json", "postgres", "runtime-tokio-rustls", "rust_decimal", "uuid"] }
+deadpool-redis = "0.14"
+chrono = { version = "0.4", features = ["serde"] }
+syn = { version = "2.0", features = ["extra-traits", "full", "visit"] }
+quote = "1.0"
+proc-macro2 = "1.0"
+fake = { version = "2.8", features = ["chrono", "derive", "uuid"] }
+proptest = "1.0"
+
+[features]
+default = ["brazilian", "graphql", "database"]
+brazilian = []
+graphql = []
+database = []
+service = []
+
+[[test]]
+name = "payment_macros_test"
+path = "tests/payment_macros_test.rs"
+
+[profile.test]
+opt-level = 1
+debug = true
+overflow-checks = true
+
+[profile.bench]
+opt-level = 3
+debug = false
+lto = true
+codegen-units = 1
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+
