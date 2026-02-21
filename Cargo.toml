@@ -9,6 +9,8 @@ description = "Code generation macros for Pleme services with Brazilian market f
 repository = "https://github.com/pleme-io/pleme-codegen"
 homepage = "https://github.com/pleme-io/pleme-codegen"
 readme = "README.md"
+keywords = ["codegen", "macros", "proc-macro", "graphql", "database"]
+categories = ["development-tools::procedural-macro-helpers"]
 
 [lib]
 proc-macro = true
